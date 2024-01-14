@@ -13,21 +13,23 @@ stages:
 - stage: Build
   jobs:
   - job: BuildJob
+    
     steps:
     - script: echo "Building the application"
-      diplayName : 'Build Application'
+    displayName : 'Buil'd Application'
+    
 
 - stage: Test
   jobs:
   - job: TestJob
     steps:
     - script: echo "Running tests"
-      diplayName : 'Test Application'
+    displayName : 'Test Application'
 
 - stage: Deploy
   jobs:
   - job: DeployJob
     steps:
     - script: echo "Deploying the application"
-      diplayName : 'Deploy Application'
+      displayName : 'Deploy Application'
 
