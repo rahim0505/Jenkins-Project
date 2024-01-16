@@ -9,13 +9,13 @@ jobs:
   displayName: 'Build and Deploy Java Application'
   steps:
   - script: |
-      cd $(Build.SourcesDirectory)/java_application
+      cd $(Build.SourcesDirectory)/Java_Application
       javac -d $(Build.BinariesDirectory)/classes src/*.java
     displayName: 'Compile Java Code'
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/Application_java'
+      SourceFolder: '$(Build.SourcesDirectory)/Java_Application'
       Contents: '**'
       TargetFolder: '$(Build.BinariesDirectory)/classes'
     displayName: 'Copy HTML files'
