@@ -8,11 +8,6 @@ jobs:
 - job: BuildAndDeploy
   displayName: 'Build and Deploy Java Application'
   steps:
-  - task: UseJavaVersion@1
-    inputs:
-      versionSpec: '8'
-      addToPath: true
-
   - script: |
       cd $(Build.SourcesDirectory)/java_application
       javac -d $(Build.BinariesDirectory)/classes src/*.java
