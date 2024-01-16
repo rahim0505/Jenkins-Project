@@ -1,33 +1,41 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
-stages:
-- stage: Build
-  jobs:
-  - job: BuildJob
-    displayName: 'Build Application'
-    steps:
-    - script: echo "Building the application"
+jobs:
+- job: BuildAndDeploy
+  displayName: 'Build and Deploy Java Application'
+  steps:
+  - task: UseJavaVersion@1
+    inputs:
+      versionSpec: '8'
+      addToPath: true
 
-- stage: Test
-  jobs:
-  - job: TestJob
-    displayName: 'Test Application'
-    steps:
-    - script: echo "Running tests"
+  - script: |
+      cd $(Build.SourcesDirectory)/java_application
+      javac -d $(Build.BinariesDirectory)/classes src/*.java
+    displayName: 'Compile Java Code'
 
-- stage: Deploy
-  jobs:
-  - job: DeployJob
-    displayName: 'Deploy Application'
-    steps:
-    - script: echo "Deploying the application"
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/Application_java'
+      Contents: '**'
+      TargetFolder: '$(Build.BinariesDirectory)/classes'
+    displayName: 'Copy HTML files'
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.BinariesDirectory)/classes'
+      includeRootFolder: false
+      archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+    displayName: 'Archive Artifacts'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'java-app'
+      publishLocation: 'Container'
+    displayName: 'Publish Artifact'
 
