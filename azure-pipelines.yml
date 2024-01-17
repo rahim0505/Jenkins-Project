@@ -59,7 +59,7 @@ stages:
 
     - task: ExtractFiles@1
       inputs:
-        archiveFilePatterns: '$(Agent.TempDirectory)/*.zip'
+        archiveFilePatterns: '$(Agent.TempDirectory)/java-app/**/*.zip'
         destinationFolder: '$(Agent.TempDirectory)/java-app/java-app'
       displayName: 'Extract Artifact'
  
