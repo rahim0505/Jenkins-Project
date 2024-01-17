@@ -62,11 +62,12 @@ stages:
         archiveFilePatterns: '$(Agent.TempDirectory)/java-app/app.zip'
         destinationFolder: '$(Agent.TempDirectory)/java-app'
       displayName: 'Extract Artifact'
+ 
 
-    - task: TomcatDeploy@0
-      inputs:
-        tomcatConnection: 'TomcatConnection'  # Assuming you have a service connection configured
-        warFile: '$(Agent.TempDirectory)/java-app/*.war'
-        path: '/your-app-context'  # Replace with your actual context path
-        options: '-DsomeOption=someValue'
-      displayName: 'Deploy to Tomcat Server'
+  ## - task: TomcatDeploy@0
+  ##   inputs:
+  ##    tomcatConnection: 'TomcatConnection'  # Assuming you have a service connection configured
+  ##    warFile: '$(Agent.TempDirectory)/java-app/*.war'
+  ##   path: '/your-app-context'  # Replace with your actual context path
+  ##   options: '-DsomeOption=someValue'
+  ## displayName: 'Deploy to Tomcat Server'##
