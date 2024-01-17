@@ -59,11 +59,10 @@ stages:
 
     - task: ExtractFiles@1
       inputs:
-        archiveFilePatterns: '$(Agent.TempDirectory)/java-app/app.zip'
+        archiveFilePatterns: '$(Agent.TempDirectory)/java-app/java-app/app.zip'
         destinationFolder: '$(Agent.TempDirectory)/java-app'
       displayName: 'Extract Artifact'
  
-
   ## - task: TomcatDeploy@0
   ##   inputs:
   ##    tomcatConnection: 'TomcatConnection'  # Assuming you have a service connection configured
