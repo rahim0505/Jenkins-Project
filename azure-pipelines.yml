@@ -4,33 +4,69 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs:
-- job: BuildAndDeploy
-  displayName: 'Build and Deploy Java Application'
-  steps:
-  - script: |
-      cd $(Build.SourcesDirectory)/Java_Application
-      javac -d $(Build.BinariesDirectory)/classes src/*.java
-    displayName: 'Compile Java Code'
+stages:
+- stage: Build
+  displayName: 'Build Java Application'
+  jobs:
+  - job: Build
+    displayName: 'Build Java Code'
+    steps:
+    - script: |
+        cd $(Build.SourcesDirectory)/Java_Application
+        javac -d $(Build.BinariesDirectory)/classes src/*.java
+      displayName: 'Compile Java Code'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/Java_Application'
-      Contents: '**'
-      TargetFolder: '$(Build.BinariesDirectory)/classes'
-    displayName: 'Copy HTML files'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/Java_Application'
+        Contents: '**'
+        TargetFolder: '$(Build.BinariesDirectory)/classes'
+      displayName: 'Copy HTML files'
 
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)/classes'
-      includeRootFolder: false
-      archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
-    displayName: 'Archive Artifacts'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)/classes'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+      displayName: 'Archive Artifacts'
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'java-app'
-      publishLocation: 'Container'
-    displayName: 'Publish Artifact'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: 'java-app'
+        publishLocation: 'Container'
+      displayName: 'Publish Artifact'
 
+- stage: Deploy
+  displayName: 'Deploy to Tomcat Server'
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Java Application to Tomcat'
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'java-app'
+        downloadPath: '$(System.ArtifactsDirectory)/java-app'
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.ArtifactsDirectory)/java-app'
+        Contents: '**'
+        TargetFolder: '$(Agent.TempDirectory)/java-app'
+      displayName: 'Copy Artifact Files'
+
+    - task: ExtractFiles@1
+      inputs:
+        archiveFilePatterns: '$(Agent.TempDirectory)/java-app/app.zip'
+        destinationFolder: '$(Agent.TempDirectory)/java-app'
+      displayName: 'Extract Artifact'
+
+    - task: TomcatDeploy@0
+      inputs:
+        tomcatConnection: 'TomcatConnection'  # Assuming you have a service connection configured
+        warFile: '$(Agent.TempDirectory)/java-app/*.war'
+        path: '/your-app-context'  # Replace with your actual context path
+        options: '-DsomeOption=someValue'
+      displayName: 'Deploy to Tomcat Server'
