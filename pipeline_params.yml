@@ -4,6 +4,8 @@ name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:
 #  Pipeline Practice
 ##############################################################
 
+
+## Parameters ##
 parameters:
   - name: version
     displayName: Ticket Freeze type
@@ -13,4 +15,11 @@ parameters:
       - minor
       - major
 
-  
+## Conditions -- All 3 types ##
+## Variables  ##
+## Job Status Check Fcts ##
+## Each Keyword ##
+## Templates ##
+## Inputs ##
+## Arguments ##
+
