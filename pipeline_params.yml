@@ -1,7 +1,7 @@
 name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:dd) $(Rev:.r)
 
 ##############################################################
-#  Pipeline Pre-release
+#  Pipeline Practice
 ##############################################################
 
 parameters:
@@ -13,47 +13,4 @@ parameters:
       - minor
       - major
 
-  - name: old_branch_minor
-    displayName: Old branch for Minor
-    type: object
-    default: support/saas-XXXXVX.X.X
-
-  - name: new_branch_minor
-    displayName: New branch for Minor
-    type: object
-    default: support/saas-XXXXVX.X.X
-
-  - name: base_branch
-    displayName: Branch on which to base the new one
-    type: object
-    default: branch
-
-  - name: tag_name_minor
-    displayName: Tag for Minor
-    type: string
-    default: XXXXVX.X.X
-
-  - name: new_branch_major
-    displayName: New branch for Major
-    type: object
-    default: release/XXXXVX
-
-  - name: tag_name_major
-    displayName: Tag for Major
-    type: string
-    default: XXXXVX.X.X
-
-trigger:
-- none
-
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  
