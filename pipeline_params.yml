@@ -57,10 +57,10 @@ stages:
  
     steps:
     - script:  |
-      echo "Array values:"
-      for item in "${{ parameters.param2[@] }}"; do
+        echo "Array values:"
+        for item in "${{ parameters.param2[@] }}"; do
         echo "- $item"
-      done
+        done
 
 
 
