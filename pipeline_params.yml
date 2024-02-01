@@ -28,7 +28,12 @@ stages:
 
   - job: job2
     steps:
-    - template: templates/template1.yaml   
+    # Task as template #
+    - template: templates/template1_step.yaml
+
+    # Job as template #
+  - template: templates/template2_job.yaml
+
 
 
       
