@@ -22,7 +22,10 @@ parameters:
   - name: param2
     displayName: Param2
     type: array
-    default: []
+    default: 
+    - 'value1'
+    - 'value2'
+  
 
 stages:
 - stage: stage1
@@ -30,6 +33,8 @@ stages:
   - job: job1
     steps:
     - script: echo "Hello ${{parameters.param1}}"
+    
+  
 
   - job: job2
     steps:
@@ -39,10 +44,18 @@ stages:
     # Job as template #
   - template: templates/template2_job.yaml
   
-    # template with param #
+    # Job template with param #
   - template: templates/template3_withParam.yaml
     parameters:
-      tempalate_name: 'job 4 with param' 
+      tempalate_name: 'job 4 with param'
+    
+# Job with param array #
+  - job: job5
+    steps:
+    - script: |
+        echo "Array values:"
+        ${{ each item in parameters.param2 }}:
+        - echo "- ${{ item }}"
 
 
 
