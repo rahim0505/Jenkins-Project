@@ -4,6 +4,7 @@ name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:
 #  Pipeline Practice
 ##############################################################
 
+trigger: none 
 
 ## Parameters ##
 parameters:
