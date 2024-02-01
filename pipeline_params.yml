@@ -24,7 +24,7 @@ stages:
   jobs:
   - job: job1
     steps:
-    - script: echo "Hello $(parameters.param1)"
+    - script: echo "Hello $[parameters.param1]"
     
 
 
