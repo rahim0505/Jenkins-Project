@@ -19,6 +19,11 @@ parameters:
       - value1
       - value2
 
+  - name: param2
+    displayName: Param2
+    type: array
+    default: []
+
 stages:
 - stage: stage1
   jobs:
