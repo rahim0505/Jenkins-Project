@@ -33,6 +33,8 @@ stages:
 
     # Job as template #
   - template: templates/template2_job.yaml
+  
+    # template with param #
 
 
 
