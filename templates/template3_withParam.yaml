@@ -1,0 +1,11 @@
+ parameters:
+ - name : tempalate_name
+   type: string
+
+
+
+ jobs:
+  - job: job 4
+    displayName : ${{parameters.tempalate_name}}
+    steps:
+    - script: echo "hello , this is from template job"  
