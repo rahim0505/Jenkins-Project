@@ -24,7 +24,7 @@ stages:
   jobs:
   - job: job1
     steps:
-    - script: echo "Hello, Azure Pipelines!"
+    - script: echo "Hello $(parameters.param1)"
     
 
 
