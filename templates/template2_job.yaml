@@ -1,0 +1,4 @@
+  jobs:
+  - job: job3
+    steps:
+    - echo: echo "hello , this is from template job"  
