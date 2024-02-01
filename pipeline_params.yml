@@ -25,8 +25,10 @@ stages:
   - job: job1
     steps:
     - script: echo "Hello ${{parameters.param1}}"
-    - template: templates/template1.yaml
-    
+
+  - job: job2
+    steps:
+    - template: templates/template1.yaml   
 
 
       
