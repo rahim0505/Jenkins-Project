@@ -35,7 +35,9 @@ stages:
   - template: templates/template2_job.yaml
   
     # template with param #
-  - template: 
+  - template: templates/template3_withParam.yaml
+    parameters:
+      tempalate_name: 'job 4' 
 
 
 
