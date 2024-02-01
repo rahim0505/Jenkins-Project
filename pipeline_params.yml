@@ -59,7 +59,7 @@ stages:
     steps:
     - script:  |
         echo "Array values:"
-        for item in "${{ parameters.param2[@] }}"; do
+        for item in "${{ parameters.param2 }}"; do
         echo "- $item"
         done
 
