@@ -56,10 +56,11 @@ stages:
   - job: job5
  
     steps:
-    - script: |
-        echo "Array values:"
-        ${{ each item in parameters.param2 }}:
-        - echo "- ${{ item }}"
+    - script:  |
+      echo "Array values:"
+      for item in "${{ parameters.param2[@] }}"; do
+        echo "- $item"
+      done
 
 
 
