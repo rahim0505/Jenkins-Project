@@ -21,6 +21,7 @@ parameters:
 
   - name: param2
     displayName: Param2
+    type: array
     default:
     - 'value1'
     - 'value2'
