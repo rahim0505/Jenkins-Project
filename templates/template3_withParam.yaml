@@ -8,4 +8,4 @@
   - job: job4
     displayName : ${{parameters.tempalate_name}}
     steps:
-    - script: echo "hello , this is from template 3"  
+    - script: echo "hello , this is from template 3 with ${{parameters.tempalate_name}}"  
