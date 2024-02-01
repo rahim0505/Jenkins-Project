@@ -7,14 +7,30 @@ name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:
 trigger: none 
 
 ## Parameters ##
+## Parametres can be used with Template or Configuartion a Job ##
+# Param with a Job #
+
 parameters:
-  - name: version
-    displayName: Ticket Freeze type
+  - name: param1
+    displayName: Param1
     type: string
-    default: minor
+    default: default value
     values:
-      - minor
-      - major
+      - value1
+      - value2
+
+stages:
+- stage: stage1
+  jobs:
+  - job: job1
+    steps:
+    - script: echo "Hello, Azure Pipelines!"
+    
+
+
+      
+
+
 
 ## Conditions -- All 3 types ##
 ## Variables  ##
