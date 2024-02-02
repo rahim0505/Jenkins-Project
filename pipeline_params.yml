@@ -23,12 +23,12 @@ parameters:
     displayName: Param2
     type: object
     default:
-      - Car1
-        colors ['red' , 'black']
-      - Car2
-        colors ['red' , 'white']
-      - Car3
-        colors ['red' , 'yellow']
+      - name : Car1
+        colors : ['red' , 'black']
+      - name : Car2
+        colors : ['red' , 'white']
+      - name : Car3
+        colors : ['red' , 'yellow']
 
 stages:
 - stage: stage1
@@ -55,11 +55,11 @@ stages:
     
 # Job with param array #
   - job: job5
- 
     steps:
     - ${{ each car in parameters.param2 }}:
-      - ${{ each car_color in car.colors }}:  
-        - script:  echo "${{ car }} its color is ${{ car_color }}"
+      - ${{ each car_color in car.colors }}:
+        - script: echo "${{ car }} its color is ${{ car_color }}"
+
         
 
 
