@@ -54,8 +54,8 @@ stages:
   - job: job5
  
     steps:
-      ${{ each value in parameters.param2 }}:
-    - script:  echo ${{value}}
+    - ${{ each value in parameters.param2 }}:
+      - script:  echo ${{value}}
         
 
 
