@@ -59,7 +59,7 @@ stages:
     steps:
     - ${{ each car in parameters.param2 }}:
       - ${{ each car_color in car.colors }}:  
-      - script:  echo "${{car}} its color is ${{car_color}}
+        - script:  echo "${{car}} its color is ${{car_color}}
         
 
 
