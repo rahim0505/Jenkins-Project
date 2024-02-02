@@ -23,9 +23,9 @@ parameters:
     displayName: Param2
     type: object
     default:
-      value1: 'Value1'
-      value2: 'Value2'
-      value3: 'value3'
+      - value1
+      - value2
+      - value3
 
 stages:
 - stage: stage1
