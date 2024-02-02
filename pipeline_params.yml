@@ -53,12 +53,13 @@ stages:
     parameters:
       tempalate_name: 'job 4 with param'
     
-# Job with param array #
+# Job with param array
   - job: job5
     steps:
-    - ${{ each car in parameters.param2 }}:
-      - ${{ each car_color in car.colors }}:
-        - script: echo "${{ car }} its color is ${{ car_color }}"
+      - ${{ each car in parameters.param2 }}:
+        - ${{ each car_color in car.colors }}:
+          - script: echo "${{ car.name }} its color is ${{ car_color }}"
+
 
         
 
