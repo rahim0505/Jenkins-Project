@@ -23,9 +23,12 @@ parameters:
     displayName: Param2
     type: object
     default:
-      - value1
-      - value2
-      - value3
+      - Car1
+        colors ['red' , 'black']
+      - Car2
+        colors ['red' , 'white']
+      - Car3
+        colors ['red' , 'yellow']
 
 stages:
 - stage: stage1
@@ -54,8 +57,9 @@ stages:
   - job: job5
  
     steps:
-    - ${{ each value in parameters.param2 }}:
-      - script:  echo ${{value}}
+    - ${{ each car in parameters.param2 }}:
+      - ${{ each car_color in car.colors }}:  
+      - script:  echo "${{car}} its color is ${{car_color}}
         
 
 
