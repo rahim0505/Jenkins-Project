@@ -1,13 +1,13 @@
 name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:dd) $(Rev:.r)
 
 ##############################################################
-#  Pipeline Practice
+#  Pipeline Practice - Params + Templates + Loop
 ##############################################################
 
 trigger: none 
 
 ## Parameters ##
-## Parametres can be used with Template or Configuartion a Job ##
+## Parametres can be used with Template or Job Configuartion ##
 # Param with a Job #
 
 parameters:
