@@ -23,12 +23,9 @@ parameters:
     displayName: Param2
     type: object
     default:
-    - 'value1'
-    - 'value2'
-
-
-
-  
+      value1: 'Value1'
+      value2: 'Value2'
+      value3: 'value3'
 
 stages:
 - stage: stage1
@@ -57,11 +54,11 @@ stages:
   - job: job5
  
     steps:
-    - script:  |
-        echo "Array values:"
-        for item in "${{ parameters.param2 }}"; do
-        echo "- $item"
-        done
+      ${{ each value in parameters.param2 }}:
+    - script:  echo ${{value}}
+        
+
+
 
 
 
