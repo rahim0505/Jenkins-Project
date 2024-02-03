@@ -43,6 +43,6 @@ stages:
   - job: job4
     displayName: JobStatus Conditions
     dependsOn: job3
-    condition: failed()
+    condition: passed()
     steps:
       - script: echo "Hello Job 3"
