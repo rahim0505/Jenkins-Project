@@ -37,6 +37,6 @@ stages:
       name : MyVar
       type : string
       value : 'var1' 
-    condition: eq(variables['MyVar'] , 'var2')
+    condition: eq(variables['MyVar'] , 'var1')
     steps:
       - script: echo "Hello Job 3"
