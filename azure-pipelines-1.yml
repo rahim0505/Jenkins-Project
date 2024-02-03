@@ -15,7 +15,7 @@ stages:
   ## 1-Built-in condition ##
   # Branch Condition #
   - job: job1
-    condition: eq(variables['Build.SourceBranch'] , 'main')
+    condition: eq(variables['Build.SourceBranch'] , 'refs/heads/main')
     steps:
     - script: echo "Hello Job 1"
 
