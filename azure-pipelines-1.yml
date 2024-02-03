@@ -15,7 +15,14 @@ stages:
   ## 1-Built-in condition ##
   # Branch Condition #
   - job: job1
+    displayName: Branch Condition
     condition: eq(variables['Build.SourceBranch'] , 'refs/heads/main')
     steps:
     - script: echo "Hello Job 1"
 
+  # Build trigger Condition #
+  - job: job2
+    displayName: trigger Condition
+    condition: eq(variables['Build.Reason'] , 'Manual')
+    steps:
+    - script: echo "Hello Job 1"
