@@ -1,7 +1,7 @@
 name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:dd) $(Rev:.r)
 
 ##############################################################
-#  Pipeline Practice - Params + Templates + Loop
+#  Pipeline Practice - Conditions + Variables + JobStatus Check Fcts
 ##############################################################
 
 trigger: none 
