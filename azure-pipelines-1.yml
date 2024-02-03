@@ -30,9 +30,9 @@ stages:
     steps:
     - script: echo "Hello Job 2"
     
-  # Variable Condition #
+  ## 2- Custom Condition #
   - job: job3
-    displayName: Variable Condition
+    displayName: Custom variable Condition
     variables: 
       MyVar : 'var1' 
     condition: eq(variables['MyVar'] , 'var1')
@@ -45,4 +45,12 @@ stages:
     dependsOn: job3
     condition: succeeded()
     steps:
-      - script: echo "Hello Job 3"
+      - script: echo "Hello Job 4"
+
+  ## 3- Compound Condition #
+  - job: job5
+    displayName: Compound Condition
+    dependsOn: job4
+    condition: and(eq(variables['Build.SourceBranch'] , 'refs/heads/main') , succeeded())
+    steps:
+      - script: echo "Hello Job 5"
