@@ -26,6 +26,6 @@ stages:
   # Build trigger Condition #
   - job: job2
     displayName: trigger Condition
-    condition: eq(variables['Build.Reason'] , 'Manual')
+    condition: eq(variables['Build.Reason'] , 'IndividualCI')
     steps:
     - script: echo "Hello Job 1"
