@@ -1,0 +1,57 @@
+name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:dd) $(Rev:.r)
+
+##############################################################
+#  Pipeline Practice - Conditions + Variables + JobStatus Check Fcts + Task inputs
+##############################################################
+
+trigger: none
+#  branches:
+#    include:
+#      - main 
+
+## Conditions has different types ( 1-Built-in condition , 2-Custom Conditions , 3-Compond Conditions) ##
+
+stages:
+- stage: stage1
+  jobs:
+  
+  ## 1-Built-in condition ##
+  # Branch Condition #
+  - job: job1
+    displayName: Branch Condition
+    condition: eq(variables['Build.SourceBranch'] , 'refs/heads/main')
+    steps:
+    - script: echo "Hello Job 1"
+
+  # Build trigger Condition #
+  - job: job2
+    displayName: Trigger Condition
+    condition: eq(variables['Build.Reason'] , 'IndividualCI')
+    steps:
+    - script: echo "Hello Job 2"
+    
+  ## 2- Custom Condition #
+  - job: job3
+    displayName: Custom variable Condition
+    variables: 
+      MyVar : 'var1' 
+    condition: eq(variables['MyVar'] , 'var1')
+    steps:
+      - script: echo "Hello Job 3"
+  
+  # Never()/Always()/Failed()... Conditions #
+  - job: job4
+    displayName: JobStatus Conditions
+    dependsOn: job3
+    condition: succeeded()
+    steps:
+      - script: echo "Hello Job 4"
+
+  ## 3- Compound Condition #
+  - job: job5
+    displayName: Compound Condition
+    dependsOn: job4
+    condition: and(eq(variables['Build.SourceBranch'] , 'refs/heads/main') , failed())
+    steps:
+      - script: echo "Hello Job 5"yaml
+  displayName: 'Run a multi-line script'
