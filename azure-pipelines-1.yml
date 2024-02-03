@@ -15,7 +15,7 @@ stages:
   ## 1-Built-in condition ##
   # Branch Condition #
   - job: job1
-    condition: ne(variables['Build.SourceBranch'] , 'master')
+    condition: eq(variables['Build.SourceBranch'] , 'main')
     steps:
     - script: echo "Hello Job 1"
 
