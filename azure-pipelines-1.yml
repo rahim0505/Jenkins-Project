@@ -4,10 +4,10 @@ name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:
 #  Pipeline Practice - Conditions + Variables + JobStatus Check Fcts + Task inputs
 ##############################################################
 
-trigger:
-  branches:
-    include:
-      - main 
+trigger: none
+#  branches:
+#    include:
+#      - main 
 
 ## Conditions has different types ( 1-Built-in condition , 2-Custom Conditions , 3-Compond Conditions) ##
 
