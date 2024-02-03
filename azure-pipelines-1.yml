@@ -51,6 +51,6 @@ stages:
   - job: job5
     displayName: Compound Condition
     dependsOn: job4
-    condition: and(eq(variables['Build.SourceBranch'] , 'refs/heads/main') , succeeded())
+    condition: and(eq(variables['Build.SourceBranch'] , 'refs/heads/main') , failed())
     steps:
       - script: echo "Hello Job 5"
