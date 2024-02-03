@@ -1,0 +1,79 @@
+name: $(BuildDefinitionName) $(SourceBranchName) $(date:yyyy).$(date:MM).$(date:dd) $(Rev:.r)
+
+##############################################################
+#  Pipeline Practice - Params + Templates + Loop
+##############################################################
+
+trigger: none 
+
+## Parameters ##
+## Parametres can be used with Template or Job Configuartion ##
+# Param with a Job #
+
+parameters:
+  - name: param1
+    displayName: Param1
+    type: string
+    default: default value
+    values:
+      - value1
+      - value2
+
+  - name: param2
+    displayName: Param2
+    type: object
+    default:
+      - name : Car1
+        colors : ['red' , 'black']
+      - name : Car2
+        colors : ['red' , 'white']
+      - name : Car3
+        colors : ['red' , 'yellow']
+
+stages:
+- stage: stage1
+  jobs:
+  
+  - job: job1
+    steps:
+    - script: echo "Hello ${{parameters.param1}}"
+    
+  
+
+  - job: job2
+    steps:
+    # Task as template #
+    - template: templates/template1_step.yaml
+
+    # Job as template #
+  - template: templates/template2_job.yaml
+  
+    # Job template with param #
+  - template: templates/template3_withParam.yaml
+    parameters:
+      tempalate_name: 'job 4 with param'
+    
+# Job with param array
+  - job: job5
+    steps:
+      - ${{ each car in parameters.param2 }}:
+        - ${{ each car_color in car.colors }}:
+          - script: echo "${{ car.name }} its color is ${{ car_color }}"
+
+
+        
+
+
+
+
+
+
+## Conditions -- All 3 types ##
+## Variables  ##
+## Job Status Check Fcts ##
+## Each Keyword ##
+## Templates ##
+## Inputs ##
+## Arguments ##
+
+
